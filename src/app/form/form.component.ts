@@ -24,8 +24,9 @@ export class FormComponent {
     ]),
     dob: ['', [Validators.required, futureDateValidator()]],
     city: ['select', Validators.required],
-    agree: ['', Validators.requiredTrue]
+    agree: [false, Validators.requiredTrue]
   })
+
   onCheckboxChange(e: any) {
     const hobbies: FormArray = this.userForm.get('hobbies') as FormArray;
     if (e.target.checked) {
@@ -34,6 +35,9 @@ export class FormComponent {
       const index = hobbies.controls.findIndex(x => x.value === e.target.value);
       hobbies.removeAt(index);
     }
+  }
+  get hobbies(): FormArray {
+    return this.userForm.get('hobbies') as FormArray;
   }
 
   get mobileNumbers() {
@@ -52,15 +56,15 @@ export class FormComponent {
     console.log(this.userForm);
     if (this.userForm?.valid && this.userForm.value.agree) {
       console.log(this.userForm.value);
-      // console.log("Name:", this.userForm.value.username);
-      // console.log("Email:", this.userForm.value.email);
-      // console.log("Gender:", this.userForm.value.gender);
-      // console.log("Hobbies:", this.userForm.value.hobbies);
-      // console.log("DOB:", this.userForm.value.dob);
-      // console.log("City:", this.userForm.value.city);
+      this.userForm.reset();
+      this.hobbies.clear();
     }
-    else {
-      console.log("Error");
+    else if(!this.userForm.value.agree) {
+      console.log("Agreement Error");
+      alert("You must agree to the terms and conditions!!")
+    }
+    else{
+      alert("Please fill out the form correctly!!")
     }
   }
 }
