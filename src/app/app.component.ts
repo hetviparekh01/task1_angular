@@ -6,7 +6,7 @@ import { AbstractControl, FormArray, FormBuilder,FormControl,FormGroup,Validator
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
- 
+ title:string="task1 angular"
 }
 
 

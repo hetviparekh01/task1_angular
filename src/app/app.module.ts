@@ -5,13 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormComponent } from './form/form.component';
-
+import { AgGridModule } from 'ag-grid-angular';
+import { AgTableComponent } from './ag-table/ag-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
-  
+    AgTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +20,7 @@ import { FormComponent } from './form/form.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,140 +1,227 @@
-
-
 <div class="row justify-content-center my-3">
     <div class="col-lg-6 border border-1 p-5">
         <form [formGroup]="userForm" (ngSubmit)="submitForm()">
-            <h1 class="text-center mb-4">Registration Form</h1>
+            <h1 class="text-center">Registration Form</h1> 
 
-            <!-- Username -->
-            <div class="row mb-3">
-                <div class="col">
+            <!-- username -->
+            <div class="row my-3">
+                <div class="mb-3">
                     <label for="username" class="form-label">Username:</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter username" formControlName="username">
-                    <div *ngIf="userForm.get('username')?.invalid" class="text-danger">
-                        <span *ngIf="userForm.get('username')?.errors?.['required']">Username is required.</span>
-                        <span *ngIf="userForm.get('username')?.errors?.['minlength']">Username must be at least 5 characters long.</span>
-                        <span *ngIf="userForm.get('username')?.errors?.['pattern']">Username must contain only characters.</span>
+                    <input type="text" class="form-control" id="username" placeholder="username" minlength="5"
+                        formControlName="username" />
+                    <div *ngIf="userForm.get('username')?.invalid"
+                        class="text-danger">
+                        <span *ngIf="userForm.get('username')?.errors?.['required']">
+                            **Name is required.
+                        </span>
+                        <span *ngIf="userForm.get('username')?.errors?.['minlength']">
+                            Name must be at least 5 characters long
+                        </span>
+                        <span *ngIf="userForm.get('username')?.errors?.['pattern']">
+                            Name must be characters only
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <!-- Email -->
-            <div class="row mb-3">
-                <div class="col">
+            <!-- email -->
+            <div class="row my-3">
+                <div class="mb-3">
                     <label for="email" class="form-label">Email address:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
-                    <div *ngIf="userForm.get('email')?.invalid" class="text-danger">
-                        <span *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</span>
-                        <span *ngIf="userForm.get('email')?.errors?.['pattern']">Invalid email format.</span>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
+                    <div *ngIf="userForm.get('email')?.invalid " class="text-danger">
+                        <span *ngIf="userForm.get('email')?.errors?.['required']">**email is required</span>
+                        <span *ngIf="userForm.get('email')?.errors?.['pattern']"> Invalid Email </span>
                     </div>
                 </div>
             </div>
 
             <!-- Gender -->
-            <div class="row mb-3">
-                <label for="gender" class="form-label col-auto">Gender:</label>
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender">
-                        <label class="form-check-label" for="male">Male</label>
+            <div class="row my-3">
+                <label for="exampleFormControlInput1" class="form-label">Gender:</label>
+                <div class="col-lg-2 col-sm-12 col-md-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender" formControlName="gender"
+                            value="male">
+                        <label class="form-check-label" for="gender">
+                            Male
+                        </label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender">
-                        <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="col-lg-2 col-sm-12 col-md-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender" formControlName="gender"
+                            value="female">
+                        <label class="form-check-label" for="Gender">
+                            Female
+                        </label>
                     </div>
                 </div>
                 <div *ngIf="userForm.get('gender')?.invalid" class="text-danger">
-                    <span>* Gender is required.</span>
+                    <span *ngIf="userForm.get('gender')?.errors?.['required']">
+                        **gender is required.
+                    </span>
                 </div>
             </div>
 
             <!-- Hobbies -->
-            <div class="row mb-3">
-                <label class="form-label col-auto">Hobbies:</label>
-                <div class="col">
+            <div class="row my-3">
+                <label for="exampleFormControlInput1" class="form-label">Hobbies:</label>
+                <div class="col-lg-2 col-sm-12 col-md-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Sports" id="sports" formControlName="hobbies">
-                        <label class="form-check-label" for="sports">Sports</label>
+                        <input class="form-check-input hobbies" type="checkbox" value="Sports" id="sports"
+                            (change)="onCheckboxChange($event)">
+                        <label class="form-check-label" for="sports">
+                            Sports
+                        </label>
                     </div>
+                </div>
+                <div class="col-lg-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Cultural" id="cultural" formControlName="hobbies">
-                        <label class="form-check-label" for="cultural">Cultural</label>
+                        <input class="form-check-input hobbies" type="checkbox" value="Cultural" id="cultural"
+                            (change)="onCheckboxChange($event)">
+                        <label class="form-check-label" for="cultural">
+                            Cultural
+                        </label>
                     </div>
+                </div>
+                <div class="col-lg-2 col-sm-12 col-md-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Art" id="art" formControlName="hobbies">
-                        <label class="form-check-label" for="art">Art</label>
+                        <input class="form-check-input hobbies" type="checkbox" value="Art" id="art"
+                            (change)="onCheckboxChange($event)">
+                        <label class="form-check-label" for="art">
+                            Art
+                        </label>
                     </div>
-                    <div *ngIf="userForm.get('hobbies')?.invalid && userForm.get('hobbies')?.touched" class="text-danger">
-                        <span>* At least one hobby must be selected.</span>
-                    </div>
+                </div>
+                <div *ngIf="userForm.get('hobbies')?.invalid" class="text-danger">
+                    <span *ngIf="userForm.get('hobbies')?.errors?.['required']">
+                        **hobbies are required.
+                    </span>
                 </div>
             </div>
 
-            <!-- Mobile Numbers -->
-            <div class="row mb-3">
-                <div class="col">
+
+            <!-- Mobile -->
+            <!-- <div class="row my-3">
+                <div class="mb-3">
                     <div formArrayName="mobileNumber">
                         <div *ngFor="let mobile of mobileNumbers.controls; let i=index" class="my-2">
-                            <label for="mobile-{{i}}" class="form-label">Mobile Number {{ i +1 }}:</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="mobile-{{i}}" [formControlName]="i">
-                                <button type="button" class="btn btn-danger" (click)="removeFeild(i)" *ngIf="i > 0">-</button>
-                            </div>
-                            <div *ngIf="mobile.invalid && mobile.touched" class="text-danger">
-                                <span *ngIf="mobile.errors?.['required']">* Mobile number is required.</span>
-                                <span *ngIf="mobile.errors?.['pattern']">* Mobile number must be 10 digits.</span>
+                            <label for="mobile" class="form-label" >MobileNumber{{ i +1}}:</label>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input type="text" class="form-control" id="mobile" [formControlName]="i">
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btn btn-primary" (click)="removeFeild(i)" *ngIf="i>0">-</button>
+                                </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary my-2" (click)="addFeild()">Add Mobile Number</button>
-                    </div>
+                        <button type="button" class="btn btn-primary my-2" (click)="addFeild()" >Add Mobile Number</button>
+                        <div *ngIf="userForm.get('mobileNumber')?.invalid && (userForm.get('mobileNumber')?.touched) " class="text-danger">
+                            <span *ngIf="userForm.get('mobileNumber')?.errors?.['required'] && (userForm.get('mobileNumber')?.touched)">
+                                **mobile number is required.
+                            </span>
+                            <span *ngIf="userForm.get('mobileNumber')?.errors?.['pattern']">
+                                **mobileNumber must be of 10.
+                            </span>
+                        </div>
+                    </div>   
                 </div>
-            </div>
-
+            </div>  -->
+          
+                 <div class="row my-3">
+                  <div class="mb-3">
+                    <div formArrayName="mobileNumber">
+                      <div *ngFor="let mobile of mobileNumbers.controls; let i=index" class="my-2">
+                        <label for="mobile-{{i}}" class="form-label">Mobile Number {{ i +1 }}:</label>
+                        <div class="row">
+                          <div class="col-11">
+                            <input type="text" class="form-control" id="mobile-{{i}}" [formControlName]="i">
+                          </div>
+                          <div class="col-1">
+                            <button type="button" class="btn btn-primary" (click)="removeFeild(i)" *ngIf="i > 0">-</button>
+                          </div>
+                        </div>
+                        <div *ngIf="mobile.invalid " class="text-danger">
+                          <span *ngIf="mobile.errors?.['required']">
+                            **Mobile number is required.
+                          </span>
+                          <span *ngIf="mobile.errors?.['pattern']">
+                            **Mobile number must be 10 digits.
+                          </span>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-primary my-2" (click)="addFeild()">Add Mobile Number</button>
+                    </div>
+                  </div>
+                </div>
+         
+              
             <!-- DOB -->
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="dob" class="form-label">Date of Birth:</label>
+            <div class="row my-3">
+                <div class="mb-3">
+                    <label for="dob" class="form-label">DOB:</label>
                     <input type="date" class="form-control" id="dob" formControlName="dob">
-                    <div *ngIf="userForm.get('dob')?.invalid && userForm.get('dob')?.touched" class="text-danger">
-                        <span *ngIf="userForm.get('dob')?.errors?.['required']">* Date of birth is required.</span>
-                        <span *ngIf="userForm.get('dob')?.errors?.['futureDate']">* Future dates are not allowed.</span>
+                    <div *ngIf="userForm.get('dob')?.invalid" class="text-danger">
+                        <span *ngIf="userForm.get('dob')?.errors?.['required']">
+                            **dob is required.
+                        </span>
+                        <span *ngIf="userForm.get('dob')?.errors?.['futureDate']">
+                            **future date is not allowed.
+                        </span>
                     </div>
                 </div>
             </div>
 
             <!-- City -->
-            <div class="row mb-3">
-                <div class="col">
+            <div class="row">
+                <div class="mb-3">
                     <label for="city" class="form-label">City:</label>
-                    <select class="form-select" id="city" formControlName="city">
-                        <option value="select" disabled selected>Select a city</option>
-                        <option value="Ahmedabad">Ahmedabad</option>
+                    <select class="form-select" aria-label="Default select example" formControlName="city">
+                        <option disabled value="select">Select the City</option>
+                        <option value="Ahemdabad">Ahemdabad</option>
                         <option value="Vadodara">Vadodara</option>
                         <option value="Surat">Surat</option>
                     </select>
-                    <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched" class="text-danger">
-                        <span>* City is required.</span>
+                    <div *ngIf="userForm.get('city')?.value==='select'" class="text-danger">
+                            <span>
+                                **city is required.
+                            </span>
                     </div>
                 </div>
             </div>
 
-            <!-- Agree to Terms and Conditions -->
-            <div class="row mb-3">
-                <div class="col">
+            <!-- Agree to term & condition -->
+            <div class="row my-3">
+                <div class="col-lg-4 col-sm-12 col-md-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="agree" formControlName="agree">
-                        <label class="form-check-label" for="agree">I agree to the terms and conditions</label>
-                    </div>
-                    <div *ngIf="userForm.get('agree')?.invalid && userForm.get('agree')?.touched" class="text-danger">
-                        <span>* You must agree to the terms and conditions.</span>
+                        <input class="form-check-input" type="checkbox" value="agree" id="agree"
+                            formControlName="agree">
+                        <label class="form-check-label" for="agree">
+                            I Agree to terms and condition
+                        </label>
                     </div>
                 </div>
             </div>
-
-            <!-- Submit Button -->
-            <div class="row justify-content-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- Submit button -->
+            <div class="row justify-content-center">    
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+                <!-- <a href="../ag-table/ag-table.component.html" class="btn btn-primary" type="submit" role="button" data-bs-toggle="button">Submit</a> -->
             </div>
         </form>
     </div>
-</div>
+</div> 
+<h2 class="text-center">Data</h2>
+<!-- AG Grid to display data -->
+ <div class="d-flex justify-content-center">
+    <ag-grid-angular
+    style="width: 70%; height: 300px;"
+    class="ag-theme-alpine " 
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [pagination]="true">
+  </ag-grid-angular>
+ </div>
